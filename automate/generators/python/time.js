@@ -21,5 +21,5 @@ Blockly.Python['time'] = function(block) {
   
   var code =  "time.sleep(" + text_sleep_sec + ")";
   return code + '\n' + '\n';
-  return code;
+  
 };

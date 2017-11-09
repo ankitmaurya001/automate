@@ -1,0 +1,12 @@
+{
+	"testset" : "jdsu",
+	"interface" : "scpi",
+	"commandMode" : "runOnce",
+	"commandList" : {
+		{"selectFlow":":SOUR:DATA:TEL:MAC:SEL"},
+		{"changeFlowSrcAddress":":SOUR:DATA:TEL:MAC:SEL:HEAD:SOUR:ADDR" ,"args" : "macAddr"},
+		{"applyFlowChanges":":SOUR:DATA:TEL:MAC:FLOW:EDIT:OK"},
+		{"identifyMe": "*IDN?"},
+		{"waitForCompletion": "*OPC?"}
+	}
+}

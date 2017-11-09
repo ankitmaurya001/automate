@@ -1,0 +1,44 @@
+
+eqaStatTrying 10.58.226.37...
+
+
+eqaStat
+Connected to fwts7.cisco.com (10.58.226.37).
+Escape character is '^]'.
+
+-> eqaStat
+EQA: phySlot: 3, eqptType: DWDM, eqptID: 0x2830
+     state: up, state cause: Prov/Init Complete
+     scSlot: 1 (192.168.190.225), socket 83, tries 0 of 240
+     provWait: 0, swUpgWait: 0, swDownloadFlag: eqaStat0
+     TOD: good 1, bad 0, max 1, min 1
+TimerList 0x353e908: 1 in list, 0 periodic, 0 processLimits
+  timer=0x353eb6c fn=0x1008a8c name=TOD  next_expire=371326 period=0
+File descriptors:
+  fn=0x100b8b4(0x0) fd=83 file=(socket TCP 192.168.190.236:1048 192.168.190.225:9100) wakeups=541 monitor=rd
+  fn=0x100b7b0(0x0) fd=24 file=/pipe/cocaCal (0 msgs) wakeups=0 monitor=rd
+  fn=0x100b268(0x0) fd=25 file=/pipe/cocaEqa (0 msgs) wakeups=708 monitor=rd
+type inetstatShow to have more details about sockets
+value = 53 = 0x35 = '5'
+-> reboot 2
+eqaStat
+EQA: phySlot: 3, eqptType: DWDM, eqptID: 0x2830
+     state: up, state cause: Prov/Init Complete
+     scSlot: 1 (192.168.190.225), socket 83, tries 0 of 240
+     provWait: 0, swUpgWait: 0, swDownloadFlag: 0
+     TOD: good 1, bad 0, max 1, min 1
+TimerList 0x353e908: 1 in list, 0 periodic, 0 processLimits
+  timer=0x353eb6c fn=0x1008a8c name=TOD  next_expire=370210 period=0
+File descriptors:
+  fn=0x100b8b4(0x0) fd=83 file=(socket TCP 192.168.190.236:1048 192.168.190.225:9100) wakeups=541 monitor=rd
+  fn=0x100b7b0(0x0) fd=24 file=/pipe/cocaCal (0 msgs) wakeups=0 monitor=rd
+  fn=0x100b268(0x0) fd=25 file=/pipe/cocaEqa (0 msgs) wakeups=708 monitor=rd
+type inetstatShow to have more details about sockets
+value = 53 = 0x35 = '5'
+-> reboot 2
+
+ ## P1 HW, could not reset Zynq..
+
+AUG 26 08:29:03.72 UTC ERROR max16046/drvVoltMan.c:391   tShell
+ **** COLD BOOT REQUESTED ****
+

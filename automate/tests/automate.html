@@ -79,7 +79,6 @@
 <script type="text/javascript" src = "plugin/codemirror/mode/javascript/javascript.js"></script>
 <script type="text/javascript" src = "plugin/codemirror/mode/python/python.js"></script>
  <script type="text/javascript" src = "plugin/codemirror/mode/xml/xml.js"></script>
-<script src="/Users/ankmaury/Desktop/automate/ace-builds-master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 
@@ -196,14 +195,21 @@ function fromXml() {
 
 
 function toCode(lang) {
- 
+ var library = document.getElementsByClassName("library")[0].value;
+ var code1 ;
+  code1 = 'import os' + '\n' + 'import sys' + '\n' + 'import time' + '\n' +'import math' + '\n' + 'from numbers import Number' + '\n' +'\n' + '\n';
+  code1 = code1 + "if os.path.realpath('" + library + "') not in sys.path:" + '\n';
+  code1 = code1 + "  " + "sys.path.append(os.path.realpath('" + library + "')) # put dir containing this file in path"
+  code1 = code1 + '\n' + '\n' ;
+  code1 = code1 + 'import tl1' + '\n' + 'import jdsu' + '\n' + 'import vxConsole' + '\n' + '\n';
 
  editor.setOption("mode", "python");
  // var output = document.getElementById('importExport');
  // output.value = Blockly[lang].workspaceToCode(workspace);
  var txt = Blockly[lang].workspaceToCode(workspace);
  //console.log(txt);
- editor.setValue(txt);
+ editor.setValue(code1);
+ editor.replaceRange(txt + "\n", {line: Infinity});
 
   taChange();
 }
@@ -444,6 +450,12 @@ h1 {
         border: 1px solid;
         background-color: grey;
 }
+.library {
+    width: 180px;
+    background-color: white;
+    font-style: italic;
+
+}
 
 
 </style>
@@ -480,6 +492,8 @@ h1 {
     <input type="button" value="Export to XML" onclick="toXml()">
     &nbsp;
     <input type="button" value="Import from XML" onclick="fromXml()">
+    &nbsp;
+    Library path: <input type="text" name="libraryPath" value="/ws/ankmaury-bgl/regression/utils/" class="library">
     <br>
     <input type="button" value="Generate Script" onclick="toCode('Python')">
     &nbsp;
@@ -507,10 +521,13 @@ h1 {
    
    <category name="Node/Console Config" colour="330">
       <block type="node_details"></block>
+      <block type="console_details"></block>
+      <block type="telnet_details"></block>
     </category>
 
     <category name="Console/TL1 " colour="120">
       <block type="console"></block>
+      <block type="telnet"></block>
       <block type="tl1"></block>
     </category>
 

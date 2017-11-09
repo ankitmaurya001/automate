@@ -1,0 +1,38 @@
+#! /usr/bin/env python
+import os
+import sys
+import tempfile
+
+if os.path.realpath('/ws/marigcha-bgl/regression/utils/') not in sys.path:
+    sys.path.append(os.path.realpath('/ws/marigcha-bgl/regression/utils/')) # put dir containing this file in path
+
+import myCfg
+import fileinput
+import vxConsole
+c = myCfg.myCfg()
+nodeip = c.get("node","ip")
+slot = c.get("node","slot")
+
+port = '200' +slot   
+if(len(sys.argv) == 2):
+        nodeip = sys.argv[1]
+        port = 23
+elif(len(sys.argv) == 3):
+    (prog,nodeip,port) = sys.argv
+
+print "connecting to ",nodeip," slot",port
+t = vxConsole.vxConsole(nodeip,port)
+#t.logfile(open('/tmp/log1','w'))
+#
+tmp = tempfile.NamedTemporaryFile(delete = False)
+
+print ("Logging to file " + tmp.name)
+
+t.logfile(tmp)
+if(sys.stdin.isatty()):
+    t.interact()
+else:
+    for line in sys.stdin:
+        print t.cmd(line)
+
+print ("\nLogged to file " + tmp.name)
