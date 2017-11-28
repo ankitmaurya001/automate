@@ -20,8 +20,10 @@ goog.require('Blockly.Python');
 
 //'#! /usr/bin/env python' + '\n' + '\n' 
 Blockly.Python['node_details'] = function(block) {
-  var node_ip         = block.getFieldValue('node_details_ip');
-  var node_id    = block.getFieldValue('node_id');
+  var node_ip                 = block.getFieldValue('node_details_ip');
+  var node_user_name          = block.getFieldValue('node_user_name');
+  var node_pwd                = block.getFieldValue('node_pwd');
+  var node_id                 = block.getFieldValue('node_id');
 
   var code1 ;
   /*
@@ -33,7 +35,7 @@ Blockly.Python['node_details'] = function(block) {
   */
   code1 = '# initialize variables' + '\n' + '\n';
   code1 = code1 + 'node' + node_id +  ' =' + '"' + node_ip + '"'  + '\n';
-  code1 = code1 + 'tl1_' + node_id +  '= tl1.Tl1(node' + node_id+ ')';
+  code1 = code1 + 'tl1_' + node_id +  '= tl1.Tl1(node' + node_id+  ',"'+ node_user_name  + '","' + node_pwd + '" )';
   code1 = code1 + '\n' + '\n';
   /*
   code1 = code1 + '# Create console object' + '\n'

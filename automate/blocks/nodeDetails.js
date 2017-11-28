@@ -6,6 +6,10 @@ Blockly.Blocks['node_details'] = {
     this.appendDummyInput()
         .appendField("TL1 - Node Ip: ")
         .appendField(new Blockly.FieldTextInput("10.64.106.188"), "node_details_ip")
+        .appendField("User Name: ")
+        .appendField(new Blockly.FieldTextInput("CISCO15"), "node_user_name")
+        .appendField("  Pwd: ")
+        .appendField(new Blockly.FieldTextInput("otbu+1"), "node_pwd")
         .appendField("   Id ")
         .appendField(new Blockly.FieldTextInput("1"), "node_id");
     this.setColour(330);
