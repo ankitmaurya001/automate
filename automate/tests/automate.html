@@ -466,8 +466,6 @@ h1 {
 
   <h1 style="color:orange;">Automate@2K</h1>
 
- 
-
   <form id="options">
     <select name="dir" onchange="document.forms.options.submit()">
       <option value="ltr">LTR</option>
@@ -493,7 +491,7 @@ h1 {
     &nbsp;
     <input type="button" value="Import from XML" onclick="fromXml()">
     &nbsp;
-    Library path: <input type="text" name="libraryPath" value="/ws/ankmaury-bgl/regression/utils/" class="library">
+    Library path: <input type="text" name="libraryPath" value="/ws/ankmaury-bgl/regression/utils/"  class="library">
     <br>
     <input type="button" value="Generate Script" onclick="toCode('Python')">
     &nbsp;
@@ -587,7 +585,7 @@ h1 {
       </category>
 
       <category name="Card" colour="260">
-       <block type="card_create"></block>
+       <block type="opmode_create"></block>     
       </category>
 
       <category name="Licensing" colour="260">
@@ -659,7 +657,9 @@ h1 {
       </block>
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
+      <block type="exit_script"></block>
     </category>
+
     <category name="Math" colour="230">
       <block type="math_number" gap="32"></block>
       <block type="math_arithmetic">
@@ -834,6 +834,7 @@ h1 {
         </value>
       </block>
       <label text="Input/Output:" web-class="ioLabel"></label>
+      <block type="dual_text"></block>
       <block type="text_print">
         <value name="TEXT">
           <shadow type="text">

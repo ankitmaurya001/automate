@@ -214,6 +214,19 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
+
+Blockly.Blocks['exit_script'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("stop script");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+}
+
 /**
  * Tooltips for the 'controls_whileUntil' block, keyed by MODE value.
  * @see {Blockly.Extensions#buildTooltipForDropdown}

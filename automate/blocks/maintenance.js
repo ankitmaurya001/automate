@@ -3,9 +3,13 @@
 Blockly.Blocks['maintenance_loopback'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Slot ")
+        .appendField("NodeId:")
+        .appendField(new Blockly.FieldTextInput("1"), "NodeId")
+        .appendField("    Shelf:")
+        .appendField(new Blockly.FieldTextInput("1"), "Shelf")
+        .appendField("    Slot:")
         .appendField(new Blockly.FieldTextInput("1"), "maintenance_loopback_slot")
-        .appendField("   Card ")
+        .appendField("     Card:")
         .appendField(new Blockly.FieldDropdown([["MR-MXP","MR_MXP_ID"], ["WSE","WSE_ID"], ["200G-CK-LC","200G_CK_LC_ID"]]), "maintenance_loopback_card");
     this.appendDummyInput()
         .appendField("Port ")    

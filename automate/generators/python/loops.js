@@ -209,3 +209,11 @@ Blockly.Python['controls_flow_statements'] = function(block) {
   }
   throw 'Unknown flow statement.';
 };
+
+
+
+Blockly.Python['exit_script'] = function(block) {
+  // TODO: Assemble Python into code variable.
+  var code = 'exit()';
+  return code + '\n';
+};

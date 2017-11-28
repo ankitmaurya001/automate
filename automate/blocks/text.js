@@ -553,6 +553,21 @@ Blockly.Blocks['text_reverse'] = {
   }
 };
 
+Blockly.Blocks['dual_text'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("print ")
+        .appendField(new Blockly.FieldTextInput("Itr "), "itr")
+        .appendField(new Blockly.FieldTextInput("i"), "itr_val")
+        .appendField(new Blockly.FieldTextInput("Passed "), "result");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 /**
  *
  * @mixin

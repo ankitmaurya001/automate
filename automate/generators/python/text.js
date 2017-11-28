@@ -278,3 +278,15 @@ Blockly.Python['text_reverse'] = function(block) {
   var code = text + '[::-1]';
   return [code, Blockly.Python.ORDER_MEMBER];
 };
+
+
+Blockly.Python['dual_text'] = function(block) {
+  var text_itr      = block.getFieldValue('itr');
+  var text_itr_val  = block.getFieldValue('itr_val');
+  var text_result   = block.getFieldValue('result');
+  console.log(text_itr)
+  // TODO: Assemble JavaScript into code variable.
+  var code ;
+  code =  "print('" + text_itr + ":' + str(" + text_itr_val + ") + '" + text_result + "')" 
+  return code + '\n' + '\n' ;
+};

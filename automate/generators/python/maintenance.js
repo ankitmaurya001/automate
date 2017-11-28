@@ -29,6 +29,8 @@ dd_adminstate["IS_AINS_ID"]      = "CMDMDE=FRCD:IS,AINS" ;
 
 
 Blockly.Python['maintenance_loopback'] = function(block) {
+  var text_NodeId = block.getFieldValue('NodeId');
+  var text_Shelf  = block.getFieldValue('Shelf');
   var tv_maintenance_loopback_slot = block.getFieldValue('maintenance_loopback_slot');
   var dd_maintenance_loopback_card = block.getFieldValue('maintenance_loopback_card');
   var tv_maintenance_port = block.getFieldValue('maintenance_port');
@@ -43,12 +45,12 @@ Blockly.Python['maintenance_loopback'] = function(block) {
   portState = dd_adminstate[dd_adminstate_val];
   console.log(portState);
   if(maintenance_payloads[dd_loopback_payload] == "OCH"){
-  	aid = "CHAN-" + tv_maintenance_loopback_slot + "-" + tv_maintenance_port;
+  	aid = "CHAN-" + text_Shelf + "-" + tv_maintenance_loopback_slot + "-" + tv_maintenance_port;
   }else{
-  	aid = "VFAC-" + tv_maintenance_loopback_slot + "-" + tv_maintenance_port + "-1";
+  	aid = "VFAC-" + text_Shelf + "-" + tv_maintenance_loopback_slot + "-" + tv_maintenance_port + "-1";
   }
 
-  code = code + "print tl1.cmd('ed-" + maintenance_payloads[dd_loopback_payload] + "::" + aid ;
+  code = code + "print tl1_" + text_NodeId +".cmd('ed-" + maintenance_payloads[dd_loopback_payload] + "::" + aid ;
   code = code + ":scr:::" + portState + ";')"  + '\n';
   code = code + "time.sleep(3)";
   return code + '\n' + '\n';

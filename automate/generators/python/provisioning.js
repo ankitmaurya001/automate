@@ -22,6 +22,8 @@ goog.require('Blockly.Python');
 
 
  var opmodes = {};
+ opmodes["TXP_10G_opmode"]   = "TXP-10G";
+ opmodes["RGN_10G_opmode"]   = "RGN-10G";
  opmodes["TXP_100G_opmode"]  = "TXP-100G";
  opmodes["RGN_100G_opmode"]  = "RGN-100G";
  opmodes["MXP_200G_opmode"]  = "MXP-200G";
@@ -65,6 +67,8 @@ skipPeerCardSlots["15_skipPeerCard"]      = "15";
 
 
 Blockly.Python['provisioning_ppm_createppm'] = function(block) {
+  var text_NodeId = block.getFieldValue('NodeId');
+  var text_Shelf = block.getFieldValue('Shelf');
   var text_slotname = block.getFieldValue('SlotName');
   var dropdown_provisioning_ppm_createppm_card = block.getFieldValue('provisioning_ppm_createPPM_card');
   var text_ppmno = block.getFieldValue('ppmNo');
@@ -78,6 +82,8 @@ return 'print(' +  code + ')\n';
 
 
 Blockly.Python['provisioning_ppm_createpayload'] = function(block) {
+  var text_NodeId = block.getFieldValue('NodeId');
+  var text_Shelf = block.getFieldValue('Shelf');
   var tv_paylaod_slotName = block.getFieldValue('SlotName');
   var dd_paylaod_cardName = block.getFieldValue('provisioning_ppm_createpayload_card');
   var tv_ppmno = block.getFieldValue('ppmNo');
@@ -85,7 +91,7 @@ Blockly.Python['provisioning_ppm_createpayload'] = function(block) {
  
   // TODO: Assemble Python into code variable.
   var code  = "#Create payload" + '\n';
-  code = code + "print tl1.cmd('ent-" + payloads[dd_paylaod_name] +'::'+ 'VFAC-' + tv_paylaod_slotName + '-' + tv_ppmno + '-1' + ":scr;')" + '\n';
+  code = code + "print tl1_" + text_NodeId +".cmd('ent-" + payloads[dd_paylaod_name] +'::'+ 'VFAC-' + text_Shelf + "-" + tv_paylaod_slotName + '-' + tv_ppmno + '-1' + ":scr;')" + '\n';
   code = code + "time.sleep(3)";
   return code + '\n' + '\n';
 };
@@ -119,4 +125,73 @@ Blockly.Python['card_create'] = function(block) {
   code = code + peerCardSlots[dd_card_create_peercard] + peerClients + "&" + skipPeerCardSlots[dd_card_create_skippeercard] + peerClients + ";')" + '\n';
   code = code + "time.sleep(3)";
   return code + '\n' + '\n'; 
+};
+
+
+
+
+//ent-opmode::slot-1-6:C:::opmode=txp-10g,trunkports=2,clientports=1;
+
+Blockly.Python['opmode_create'] = function(block) {
+  var dd_card_type = block.getFieldValue('opmode_card');
+  var checkbox_port_wse   = [];
+  var checkbox_port_falco = [];
+  
+  if(dd_card_type == 'wse_id'){
+    var text_card_create_node_wse         = block.getFieldValue('card_create_node_wse');
+    var text_card_create_shelf_wse        = block.getFieldValue('card_create_shelf_wse');
+    var text_card_create_slot_wse         = block.getFieldValue('card_create_slot_wse');
+    var dropdown_card_create_opmode_wse   = block.getFieldValue('card_create_opmode_wse');
+    checkbox_port_wse[0]                  = (block.getFieldValue('port1')  == 'TRUE');
+    checkbox_port_wse[1]                  = (block.getFieldValue('port2')  == 'TRUE');
+    checkbox_port_wse[2]                  = (block.getFieldValue('port3')  == 'TRUE');
+    checkbox_port_wse[3]                  = (block.getFieldValue('port4')  == 'TRUE');
+    checkbox_port_wse[4]                  = (block.getFieldValue('port5')  == 'TRUE');
+    checkbox_port_wse[5]                  = (block.getFieldValue('port6')  == 'TRUE');
+    checkbox_port_wse[6]                  = (block.getFieldValue('port7')  == 'TRUE');
+    checkbox_port_wse[7]                  = (block.getFieldValue('port8')  == 'TRUE');
+    checkbox_port_wse[8]                  = (block.getFieldValue('port9')  == 'TRUE');
+    checkbox_port_wse[9]                  = (block.getFieldValue('port10') == 'TRUE');
+
+    var i;
+    var code = "#Create wse opmode " + '\n';
+    for(i = 0; i < 9 ; i = i+2 ) {    
+      if(checkbox_port_wse[i] || checkbox_port_wse[i+1] ){
+        code = code + "print tl1_" +text_card_create_node_wse +".cmd('ent-opmode::slot-" + text_card_create_shelf_wse + "-" + text_card_create_slot_wse + ":c:::opmode=" + opmodes[dropdown_card_create_opmode_wse] + ","; 
+        code = code + "trunkports=" + (i+2) + ",clientports=" + (i+1) + ";')" + "\n";
+        code = code + "time.sleep(3)" + "\n";
+      }
+    }
+    return code + '\n' + '\n'; 
+  }else if(dd_card_type == 'falco_id'){
+    var text_card_create_node_wse           = block.getFieldValue('card_create_node');
+    var text_card_create_shelf              = block.getFieldValue('card_create_shelf');
+    var text_card_create_slot               = block.getFieldValue('card_create_slot');
+    var dropdown_card_create_opmode         = block.getFieldValue('card_create_opmode');
+    var dropdown_card_create_peerCard       = block.getFieldValue('card_create_peerCard');
+    var dropdown_card_create_skipPeercard   = block.getFieldValue('card_create_skipPeerCard');
+    checkbox_port_falco[0]                  = (block.getFieldValue('peer_card_port_CPAK') == 'TRUE');
+    checkbox_port_falco[1]                  = (block.getFieldValue('peer_card_port_sfp1') == 'TRUE');
+    checkbox_port_falco[2]                  = (block.getFieldValue('peer_card_port_sfp2') == 'TRUE');
+    checkbox_port_falco[3]                  = (block.getFieldValue('peer_card_port_qsfp1') == 'TRUE');
+    checkbox_port_falco[4]                  = (block.getFieldValue('peer_card_port_qsfp2') == 'TRUE');
+
+
+    var peerClients ;
+    if( (checkbox_port_falco[1]) && (checkbox_port_falco[2]) && (checkbox_port_falco[3]) && (checkbox_port_falco[4]) ){
+        peerClients = "-2&&-5";
+
+    }else{
+        peerClients = "-1";
+
+    }
+    var code = "#Create opmode " + '\n';
+    code = code + "print tl1_" + card_create_node +".cmd('ent-opmode::slot-" + text_card_create_shelf + "-" + text_card_create_slot +":c:::opmode=" + opmodes[dropdown_card_create_opmode] + ",";
+    code = code + "PEERSLOTS=SLOT-" + peerCardSlots[dropdown_card_create_peerCard] + "&SLOT-" + skipPeerCardSlots[dropdown_card_create_skipPeercard] + ",TRUNKPORTS=2,PEERCLIENTS=";
+    code = code + peerCardSlots[dropdown_card_create_peerCard] + peerClients + "&" + skipPeerCardSlots[dropdown_card_create_skipPeercard] + peerClients + ";')" + '\n';
+    code = code + "time.sleep(3)";
+    return code + '\n' + '\n'; 
+  }else{
+    return "none"
+  }
 };
