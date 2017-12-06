@@ -20,13 +20,17 @@ var telnetExpect  = {};
 
 consoleExpect["console_arrow_id"] = "cmd";
 consoleExpect["console_hash_id"]  = "cmdHash";
+consoleExpect["console_uboot_id"] = "cmdUboot";
+
 
 tl1Expect["tl1_carrot_id"] = "cmd";
 tl1Expect["tl1_hash_id"]  = "cmdHash";
+tl1Expect["tl1_uboot_id"] = "cmdUboot";
 
 
 telnetExpect["telnet_arrow_id"] = "cmd";
 telnetExpect["telnet_hash_id"]  = "cmdHash";
+telnetExpect["telnet_uboot_id"] = "cmdUboot";
 
 
 
